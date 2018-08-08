@@ -50,3 +50,41 @@ tieneExitarantizado(Marca):-
 podemosAsesorar(Empresa):-
   marca(Empresa),
   findall(Empresa, not(esLlegadora(Empresa,_)), Empresas).
+
+%Punto 8
+valen(Precio, Publicidad).
+valen(200, sexy(PorcentajePielDescubierta)):-
+  PorcentajePielDescubierta > 30,
+  PorcentajePielDescubierta < 70.
+valen(100, sexy(PorcentajePielDescubierta)).
+
+valen(500, disruptiva(_)).
+valen(Precio, tranqui(Personas, Escenario)):-
+  Escenario \= guerra,
+  Precio is 30*Personas.
+
+valen(Precio, tranqui(Personas, guerra)):-
+  Precio is 45*Personas.
+%Punto 8
+valen(Precio, Publicidad).
+valen(200, sexy(PorcentajePielDescubierta)):-
+  PorcentajePielDescubierta > 30,
+  PorcentajePielDescubierta < 70.
+valen(100, sexy(PorcentajePielDescubierta)).
+
+valen(500, disruptiva(_)).
+valen(Precio, tranqui(Personas, Escenario)):-
+  Escenario \= guerra,
+  Precio is 30*Personas.
+
+valen(Precio, tranqui(Personas, guerra)):-
+  Precio is 45*Personas.
+
+elMejor(Marcas, MayorGasto):-
+  tipoDePublicidad(Marcas, Publicidad),
+  maplist(valen, Precio, Publicidad),
+  sumlist(Precio, Gastos),
+  Gastos > 0.
+
+elMejor(Marcas, Gastos):-
+  elMejor(Marcas, Gastos).
