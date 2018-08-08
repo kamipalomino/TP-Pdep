@@ -41,4 +41,8 @@ esLlegadora(sexy(PorcentajePielDescubierta)):-
 campaniaLlegadora(Marca):-
   forall(tipoDePublicidad(Marca, Publicidad), esLlegadora(Publicidad)).
   
+%Punto 6
+tieneExitarantizado(Marca):-
+  campaniaLlegadora(Marca),
+  not(seCopian(Marca,_)).
   
