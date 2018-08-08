@@ -1,4 +1,4 @@
-
+:- encoding(utf8).
 %sexy(PorcentajePielDescubierta).
 %disruptiva(Tema).
 %tranqui(Personas, Escenario).
@@ -18,10 +18,15 @@ publicidad(Publicidad):- tipoDePublicidad(_, Publicidad).
 %tipoDePublicidad(bmw,_)
 %tipoDePublicidad(Marca, sexy(70)).
 
-:- begin_test(tipoDePublicidad).
+:- begin_tests(tipoDePublicidad, nondet).
   test(bmwNoSePublicita):-
    not(tipoDePublicidad(bmw,_)).
   test(marcaSexy70Es212):-
-    tipoDePublicidad(Marca, sexy(70)).
-    Marca is 212.
-:-end_test(tipoDePublicidad).
+    tipoDePublicidad(Marca, sexy(70)), Marca == 212.
+:- end_tests(tipoDePublicidad).
+
+%Punto 3
+seCopian(Marca1, Marca2):-
+  tipoDePublicidad(Marca1, Publicidad),
+  tipoDePublicidad(Marca2, Publicidad),
+  Marca1 \= Marca2.
