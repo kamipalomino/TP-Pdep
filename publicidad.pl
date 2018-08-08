@@ -30,3 +30,9 @@ seCopian(Marca1, Marca2):-
   tipoDePublicidad(Marca1, Publicidad),
   tipoDePublicidad(Marca2, Publicidad),
   Marca1 \= Marca2.
+
+%Punto 4
+
+esLlegadora(disruptiva(_)).
+esLlegadora(sexy(PorcentajePielDescubierta)):-
+  PorcentajePielDescubierta > 60.
