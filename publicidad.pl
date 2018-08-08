@@ -36,3 +36,9 @@ seCopian(Marca1, Marca2):-
 esLlegadora(disruptiva(_)).
 esLlegadora(sexy(PorcentajePielDescubierta)):-
   PorcentajePielDescubierta > 60.
+  
+  %Punto 5
+campaniaLlegadora(Marca):-
+  forall(tipoDePublicidad(Marca, Publicidad), esLlegadora(Publicidad)).
+  
+  
