@@ -45,4 +45,8 @@ campaniaLlegadora(Marca):-
 tieneExitarantizado(Marca):-
   campaniaLlegadora(Marca),
   not(seCopian(Marca,_)).
-  
+ 
+%Punto 7
+podemosAsesorar(Empresa):-
+  marca(Empresa),
+  findall(Empresa, not(esLlegadora(Empresa,_)), Empresas).
