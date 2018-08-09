@@ -11,6 +11,7 @@ tipoDePublicidad(netflix, disruptiva(política)).
 tipoDePublicidad(netflix, tranqui(4, habitación)).
 
 marca(Marca):- tipoDePublicidad(Marca, _).
+marca(youtube).
 publicidad(Publicidad):- tipoDePublicidad(_, Publicidad).
 
 
@@ -18,14 +19,14 @@ publicidad(Publicidad):- tipoDePublicidad(_, Publicidad).
 %tipoDePublicidad(bmw,_)
 %tipoDePublicidad(Marca, sexy(70)).
 
-:- begin_tests(tipoDePublicidad, nondet).
+:- begin_tests(tipoDePublicidad).
   test(bmwNoSePublicita):-
    not(tipoDePublicidad(bmw,_)).
   test(marcaSexy70Es212):-
     tipoDePublicidad(Marca, sexy(70)), Marca == 212.
 :- end_tests(tipoDePublicidad).
 
-%Punto 3
+%Punto
 seCopian(Marca1, Marca2):-
   tipoDePublicidad(Marca1, Publicidad),
   tipoDePublicidad(Marca2, Publicidad),
@@ -33,26 +34,30 @@ seCopian(Marca1, Marca2):-
 
 %Punto 4
 
-esLlegadora(disruptiva(_)).
+esLlegadora(disruptiva(T)):-
+   publicidad(disruptiva(T)).
+
 esLlegadora(sexy(PorcentajePielDescubierta)):-
+  publicidad(sexy(PorcentajePielDescubierta)),
   PorcentajePielDescubierta > 60.
-  
+
   %Punto 5
 campaniaLlegadora(Marca):-
   forall(tipoDePublicidad(Marca, Publicidad), esLlegadora(Publicidad)).
-  
+
 %Punto 6
 tieneExitarantizado(Marca):-
   campaniaLlegadora(Marca),
   not(seCopian(Marca,_)).
- 
+
 %Punto 7
 podemosAsesorar(Empresa):-
-  marca(Empresa),
-  findall(Empresa, not(esLlegadora(Empresa,_)), Empresas).
+   forall(marca(Empresa), not(esLlegadora(Empresa))),
+   marca(Empresa).
+
 
 %Punto 8
-valen(Precio, Publicidad).
+%valen(Precio, Publicidad).
 valen(200, sexy(PorcentajePielDescubierta)):-
   PorcentajePielDescubierta > 30,
   PorcentajePielDescubierta < 70.
@@ -66,7 +71,7 @@ valen(Precio, tranqui(Personas, Escenario)):-
 valen(Precio, tranqui(Personas, guerra)):-
   Precio is 45*Personas.
 %Punto 8
-valen(Precio, Publicidad).
+%valen(Precio, Publicidad).
 valen(200, sexy(PorcentajePielDescubierta)):-
   PorcentajePielDescubierta > 30,
   PorcentajePielDescubierta < 70.
