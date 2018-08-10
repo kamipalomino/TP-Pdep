@@ -1,4 +1,4 @@
-:- encoding(UTF()
+:- encoding(utf8).
 
 %Base de conocimientos
 
@@ -31,4 +31,13 @@ seLaMandó(murloc(pepe), mató).
 tieneAltoBicho(humano(llane), pajarito).
 tieneAltoBicho(orco(durotan, rosita), perrito).
 
+mago(Mago, Objeto, Color):- protagonista(mago(Mago, Objeto, Color)).
 
+%amigo(Amigo, OtroAmigo).
+amigo(humano(lothar), humano(llane)).
+amigo(Mago1, Mago2):-
+  mago(Mago1,_,_), mago(Mago2,_,_),
+  Mago1 \= Mago2,
+  Mago1 \= guldan, Mago2 \= guldan.
+
+%esBueno(Alguien)
